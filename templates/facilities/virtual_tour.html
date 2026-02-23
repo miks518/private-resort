@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Virtual Tour — {{ facility.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1><i class="fas fa-vr-cardboard"></i> Virtual Tour</h1>
+        <p>{{ facility.name }} — Explore from the comfort of your home.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        {% if tours %}
+        <div class="tour-grid">
+            {% for tour in tours %}
+            <div class="tour-card">
+                {% if tour.media_type == 'video' %}
+                <video controls poster="{{ tour.thumbnail.url|default:'' }}"
+                    style="width:100%; height:250px; object-fit:cover;">
+                    <source src="{{ tour.media_file.url }}" type="video/mp4">
+                </video>
+                {% elif tour.thumbnail %}
+                <img src="{{ tour.thumbnail.url }}" alt="{{ tour.title }}" style="height:250px;">
+                {% else %}
+                <img src="{{ tour.media_file.url }}" alt="{{ tour.title }}" style="height:250px;">
+                {% endif %}
+                <div class="tour-card-body">
+                    <h4>{{ tour.title }}</h4>
+                    <span class="tour-badge">{{ tour.get_media_type_display }}</span>
+                    {% if tour.description %}
+                    <p class="text-muted" style="font-size:0.85rem; margin-top:var(--space-sm);">{{ tour.description }}
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-camera"></i>
+            <h3>No Tour Media Available</h3>
+            <p>Virtual tour content for this facility is coming soon.</p>
+        </div>
+        {% endif %}
+
+        <div class="text-center mt-3">
+            <a href="{% url 'facilities:detail' slug=facility.slug %}" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Back to Facility
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

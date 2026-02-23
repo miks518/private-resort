@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>Have questions or need assistance? We'd love to hear from you.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Contact Info -->
+            <div class="contact-info-card">
+                <h3>Get in Touch</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Address</h4>
+                        <p>Jaime's Private Resort, Philippines</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+63 912 345 6789</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@jaimesresort.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Operating Hours</h4>
+                        <p>Monday — Sunday: 8:00 AM — 10:00 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="form-container" style="box-shadow:none; padding:0;">
+                <h3 style="font-size:1.35rem; margin-bottom:var(--space-lg);">Send Us a Message</h3>
+                <form method="POST" action="{% url 'core:contact' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Your full name"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-input"
+                            placeholder="What's this about?">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" class="form-input" rows="5"
+                            placeholder="Tell us how we can help..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

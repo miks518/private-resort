@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment History — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Payment History</h1>
+        <p>All your payment transactions.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        {% if payments %}
+        <div style="overflow-x:auto;">
+            <table class="reservation-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Reservation</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Status</th>
+                        <th>Receipt</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pay in payments %}
+                    <tr>
+                        <td>{{ pay.pk }}</td>
+                        <td>
+                            <a href="{% url 'reservations:detail' pk=pay.reservation.pk %}">
+                                Booking #{{ pay.reservation.pk }}
+                            </a>
+                        </td>
+                        <td>₱{{ pay.amount|floatformat:2 }}</td>
+                        <td>{{ pay.get_payment_method_display|default:"—" }}</td>
+                        <td>
+                            <span class="status-badge status-badge--{{ pay.status }}">
+                                {{ pay.get_status_display }}
+                            </span>
+                        </td>
+                        <td>{{ pay.receipt_number|default:"—" }}</td>
+                        <td>{{ pay.created_at|date:"M j, Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-receipt"></i>
+            <h3>No Payments Yet</h3>
+            <p>You haven't made any payments. Book a facility to get started!</p>
+            <a href="{% url 'facilities:list' %}" class="btn btn-primary mt-2">Browse Facilities</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

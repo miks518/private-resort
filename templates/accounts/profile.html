@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>My Profile</h1>
+        <p>Manage your account information.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="form-container" style="max-width:600px;">
+            <form method="POST" action="{% url 'accounts:profile' %}">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <input type="{{ field.field.widget.input_type|default:'text' }}" id="{{ field.id_for_label }}"
+                        name="{{ field.html_name }}" class="form-input" value="{{ field.value|default:'' }}" {% if
+                        field.field.required %}required{% endif %}>
+                    {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

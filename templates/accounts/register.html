@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="container">
+        <div class="form-container">
+            <h1>Create Account</h1>
+            <p class="form-subtitle">Join us to book facilities and explore virtual tours.</p>
+
+            <form method="POST" action="{% url 'accounts:register' %}">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <input type="{{ field.field.widget.input_type|default:'text' }}" id="{{ field.id_for_label }}"
+                        name="{{ field.html_name }}" class="form-input" value="{{ field.value|default:'' }}" {% if
+                        field.field.required %}required{% endif %} placeholder="{{ field.label }}">
+                    {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% if field.help_text %}
+                    <small class="text-muted" style="font-size:0.75rem;">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                </div>
+            </form>
+
+            <p class="form-footer">
+                Already have an account? <a href="{% url 'accounts:login' %}">Log in here</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

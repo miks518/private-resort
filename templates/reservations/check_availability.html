@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Check Availability — {{ facility.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Check Availability</h1>
+        <p>{{ facility.name }} — View booked dates before making a reservation.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container" style="max-width:700px;">
+        <div class="reservation-detail-card">
+            <h2><i class="fas fa-calendar-alt"></i> Booked Dates</h2>
+
+            {% if existing_reservations %}
+            <table class="reservation-table">
+                <thead>
+                    <tr>
+                        <th>Check-In</th>
+                        <th>Check-Out</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for res in existing_reservations %}
+                    <tr>
+                        <td>{{ res.check_in }}</td>
+                        <td>{{ res.check_out }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="text-center text-muted mt-2">No current bookings! All dates are available.</p>
+            {% endif %}
+
+            <div class="detail-actions mt-2">
+                <a href="{% url 'reservations:create' facility_slug=facility.slug %}" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i> Make a Reservation
+                </a>
+                <a href="{% url 'facilities:detail' slug=facility.slug %}" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

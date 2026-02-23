@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ facility.name }} — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<!-- Hero Image -->
+<div class="detail-hero">
+    {% if facility.image %}
+    <img src="{{ facility.image.url }}" alt="{{ facility.name }}">
+    {% else %}
+    <div
+        style="height:450px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d6e5b,#14a085);color:white;font-size:4rem;">
+        <i class="fas fa-water"></i>
+    </div>
+    {% endif %}
+</div>
+
+<section class="detail-content">
+    <div class="container">
+        <div class="detail-grid">
+            <!-- Info -->
+            <div class="detail-info">
+                <h1>{{ facility.name }}</h1>
+
+                <div class="detail-stats">
+                    <div class="detail-stat">
+                        <div class="stat-value">₱{{ facility.price_per_day|floatformat:0 }}</div>
+                        <div class="stat-label">Per Day</div>
+                    </div>
+                    <div class="detail-stat">
+                        <div class="stat-value">{{ facility.capacity }}</div>
+                        <div class="stat-label">Max Guests</div>
+                    </div>
+                    <div class="detail-stat">
+                        <div class="stat-value">
+                            {% if facility.is_available %}
+                            <span style="color:var(--color-success);">Available</span>
+                            {% else %}
+                            <span style="color:var(--color-error);">Unavailable</span>
+                            {% endif %}
+                        </div>
+                        <div class="stat-label">Status</div>
+                    </div>
+                </div>
+
+                <p>{{ facility.description }}</p>
+
+                <!-- Gallery -->
+                {% if gallery %}
+                <h3 class="mt-2" style="margin-bottom:var(--space-md);">Gallery</h3>
+                <div class="gallery-grid">
+                    {% for img in gallery %}
+                    <img src="{{ img.image.url }}" alt="{{ img.caption|default:facility.name }}">
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Virtual Tours -->
+                {% if tours %}
+                <div class="tour-section">
+                    <h3 style="margin-bottom:var(--space-lg);">
+                        <i class="fas fa-vr-cardboard"></i> Virtual Tour
+                    </h3>
+                    <div class="tour-grid">
+                        {% for tour in tours %}
+                        <div class="tour-card">
+                            {% if tour.media_type == 'video' %}
+                            <video controls poster="{{ tour.thumbnail.url|default:'' }}">
+                                <source src="{{ tour.media_file.url }}" type="video/mp4">
+                            </video>
+                            {% elif tour.thumbnail %}
+                            <img src="{{ tour.thumbnail.url }}" alt="{{ tour.title }}">
+                            {% else %}
+                            <img src="{{ tour.media_file.url }}" alt="{{ tour.title }}">
+                            {% endif %}
+                            <div class="tour-card-body">
+                                <h4>{{ tour.title }}</h4>
+                                <span class="tour-badge">{{ tour.get_media_type_display }}</span>
+                                {% if tour.description %}<p class="text-muted"
+                                    style="font-size:0.85rem; margin-top:var(--space-xs);">{{ tour.description }}</p>{%
+                                endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Booking Sidebar -->
+            <div>
+                <div class="booking-card">
+                    <h3>Book This Facility</h3>
+                    <div class="price-display">
+                        ₱{{ facility.price_per_day|floatformat:0 }} <span>/ day</span>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'reservations:create' facility_slug=facility.slug %}" class="btn btn-primary"
+                        style="width:100%;">
+                        <i class="fas fa-calendar-check"></i> Reserve Now
+                    </a>
+                    <a href="{% url 'reservations:check_availability' facility_slug=facility.slug %}"
+                        class="btn btn-outline mt-1" style="width:100%;">
+                        <i class="fas fa-calendar-alt"></i> Check Availability
+                    </a>
+                    {% else %}
+                    <a href="{% url 'accounts:login' %}?next={% url 'reservations:create' facility_slug=facility.slug %}"
+                        class="btn btn-primary" style="width:100%;">
+                        <i class="fas fa-sign-in-alt"></i> Login to Book
+                    </a>
+                    {% endif %}
+
+                    {% if tours %}
+                    <a href="{% url 'facilities:virtual_tour' slug=facility.slug %}" class="btn btn-outline mt-1"
+                        style="width:100%;">
+                        <i class="fas fa-vr-cardboard"></i> Full Virtual Tour
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

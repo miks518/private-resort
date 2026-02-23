@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Facilities — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Our Facilities</h1>
+        <p>Browse our available spaces and find the perfect venue for your next event.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <!-- Search -->
+        <form method="GET" action="{% url 'facilities:list' %}"
+            style="max-width:500px; margin:0 auto var(--space-2xl);">
+            <div style="display:flex; gap:var(--space-sm);">
+                <input type="text" name="q" class="form-input" placeholder="Search facilities..." value="{{ query }}">
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+
+        {% if facilities %}
+        <div class="card-grid">
+            {% for facility in facilities %}
+            <a href="{% url 'facilities:detail' slug=facility.slug %}" class="card"
+                style="text-decoration:none; color:inherit;">
+                {% if facility.image %}
+                <img src="{{ facility.image.url }}" alt="{{ facility.name }}" class="card-img">
+                {% else %}
+                <div class="card-img"
+                    style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d6e5b,#14a085);color:white;font-size:2rem;">
+                    <i class="fas fa-water"></i>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h3>{{ facility.name }}</h3>
+                    <p>{{ facility.description|truncatewords:25 }}</p>
+                    <div class="card-meta">
+                        <span class="card-price">₱{{ facility.price_per_day|floatformat:0 }} <span>/ day</span></span>
+                        <span class="card-capacity"><i class="fas fa-users"></i> {{ facility.capacity }} guests</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>No Facilities Found</h3>
+            <p>{% if query %}No results for "{{ query }}". Try a different search.{% else %}No facilities are available
+                at this time.{% endif %}</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

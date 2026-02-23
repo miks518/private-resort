@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}About — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>About Our Resort</h1>
+        <p>A legacy of hospitality, comfort, and unforgettable experiences.</p>
+    </div>
+</div>
+
+<div class="about-content">
+    <h2>Our Story</h2>
+    <p>
+        Jaime's Private Resort has been a beloved destination for families, friends, and groups
+        looking to escape the hustle and bustle of everyday life. Nestled in a serene setting,
+        our resort offers a private oasis where you can relax, celebrate, and reconnect.
+    </p>
+
+    <h2>Our Mission</h2>
+    <p>
+        We are dedicated to providing an exceptional resort experience that combines comfort,
+        privacy, and world-class facilities. Every guest who walks through our gates is treated
+        like family, and every event hosted here becomes a cherished memory.
+    </p>
+
+    <h2>Why Choose Us</h2>
+    <p>
+        From our crystal-clear swimming pools to our beautifully landscaped gardens, every detail
+        at Jaime's Private Resort is designed with our guests in mind. Our online reservation system
+        makes booking effortless, and our virtual tours let you explore our facilities from the
+        comfort of your home.
+    </p>
+    <p>
+        We accept multiple payment methods through our secure payment gateway, including GCash,
+        Maya, and credit/debit cards, making the booking process as smooth as your vacation.
+    </p>
+
+    <div class="text-center mt-3">
+        <a href="{% url 'facilities:list' %}" class="btn btn-primary">Explore Our Facilities</a>
+    </div>
+</div>
+{% endblock %}

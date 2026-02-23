@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Cancel Reservation — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Cancel Reservation</h1>
+        <p>Are you sure you want to cancel this booking?</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="reservation-detail-card">
+            <h2><i class="fas fa-exclamation-triangle" style="color:var(--color-warning);"></i> Confirm Cancellation
+            </h2>
+
+            <div class="detail-row">
+                <span class="detail-label">Facility</span>
+                <span class="detail-value">{{ reservation.facility.name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Dates</span>
+                <span class="detail-value">{{ reservation.check_in|date:"M j" }} — {{ reservation.check_out|date:"M j,
+                    Y" }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Total</span>
+                <span class="detail-value">₱{{ reservation.total_price|floatformat:2 }}</span>
+            </div>
+
+            <div class="detail-actions">
+                <form method="POST" action="{% url 'reservations:cancel' pk=reservation.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-times-circle"></i> Yes, Cancel Reservation
+                    </button>
+                </form>
+                <a href="{% url 'reservations:detail' pk=reservation.pk %}" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i> Go Back
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

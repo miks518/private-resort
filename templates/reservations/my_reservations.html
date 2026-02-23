@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}My Reservations — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>My Reservations</h1>
+        <p>View and manage all your bookings.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        {% if reservations %}
+        <div style="overflow-x:auto;">
+            <table class="reservation-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Facility</th>
+                        <th>Check-In</th>
+                        <th>Check-Out</th>
+                        <th>Guests</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for res in reservations %}
+                    <tr>
+                        <td>{{ res.pk }}</td>
+                        <td><a href="{% url 'facilities:detail' slug=res.facility.slug %}">{{ res.facility.name }}</a>
+                        </td>
+                        <td>{{ res.check_in|date:"M j, Y" }}</td>
+                        <td>{{ res.check_out|date:"M j, Y" }}</td>
+                        <td>{{ res.guests }}</td>
+                        <td>₱{{ res.total_price|floatformat:2 }}</td>
+                        <td>
+                            <span class="status-badge status-badge--{{ res.status }}">
+                                {{ res.get_status_display }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{% url 'reservations:detail' pk=res.pk %}" class="btn btn-outline btn-sm">View</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-calendar-times"></i>
+            <h3>No Reservations Yet</h3>
+            <p>You haven't made any bookings yet. Start by exploring our facilities!</p>
+            <a href="{% url 'facilities:list' %}" class="btn btn-primary mt-2">Browse Facilities</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Book {{ facility.name }} — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Make a Reservation</h1>
+        <p>{{ facility.name }} — ₱{{ facility.price_per_day|floatformat:0 }} per day, up to {{ facility.capacity }}
+            guests</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="form-container" style="max-width:600px;">
+            <form method="POST" action="{% url 'reservations:create' facility_slug=facility.slug %}">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                <div class="alert alert--error" style="position:static; margin-bottom:var(--space-lg);">
+                    <span>
+                        {% for error in form.non_field_errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </span>
+                </div>
+                {% endif %}
+
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-calendar-check"></i> Confirm Reservation
+                    </button>
+                </div>
+            </form>
+
+            <p class="form-footer">
+                <a href="{% url 'reservations:check_availability' facility_slug=facility.slug %}">
+                    <i class="fas fa-calendar-alt"></i> Check availability first
+                </a>
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}
