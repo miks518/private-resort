@@ -5,8 +5,7 @@ from facilities.models import Facility
 
 class Reservation(models.Model):
     """
-    Booking record linking a user to a facility for specific dates (D2 in SRS).
-    Implements Process 2.0 — Reservation Management.
+    Booking record linking a user to a facility for specific dates.
     """
 
     class Status(models.TextChoices):

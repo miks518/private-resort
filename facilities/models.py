@@ -3,8 +3,7 @@ from django.db import models
 
 class Facility(models.Model):
     """
-    Represents a bookable facility at the resort (D3 in SRS).
-    Examples: swimming pool, function hall, cottages, etc.
+    Represents a bookable facility at the resort.
     """
 
     name = models.CharField(max_length=200)
@@ -44,8 +43,7 @@ class FacilityImage(models.Model):
 
 class VirtualTour(models.Model):
     """
-    Virtual tour media associated with a facility (D5 in SRS / Process 4.0).
-    Supports images and video (stored on Cloudinary in production).
+    Virtual tour media associated with a facility.
     """
 
     class MediaType(models.TextChoices):
