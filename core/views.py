@@ -6,7 +6,6 @@ from facilities.models import Facility
 
 
 def home(request):
-    """Resort home page — showcases featured facilities."""
     featured_facilities = Facility.objects.filter(is_available=True)[:6]
     return render(request, 'core/home.html', {
         'featured_facilities': featured_facilities,
@@ -14,17 +13,14 @@ def home(request):
 
 
 def about(request):
-    """About the resort page."""
     return render(request, 'core/about.html')
 
 
 def amenities(request):
-    """Amenities / services overview page."""
     return render(request, 'core/amenities.html')
 
 
 def contact(request):
-    """Contact form page with Gmail SMTP sending."""
     if request.method == 'POST':
         name = request.POST.get('name', '').strip()
         email = request.POST.get('email', '').strip()
@@ -35,7 +31,6 @@ def contact(request):
             messages.error(request, 'Please fill in your name, email, and message.')
             return redirect('core:contact')
 
-        # Attempt to send email
         if settings.EMAIL_HOST_USER:
             try:
                 send_mail(

@@ -3,10 +3,6 @@ from django.db import models
 
 
 class User(AbstractUser):
-    """
-    Custom User model for Jaime's Private Resort.
-    Extends Django's built-in User with role support and profile fields.
-    """
 
     class Role(models.TextChoices):
         CUSTOMER = 'customer', 'Customer'
