@@ -16,6 +16,13 @@ def about(request):
     return render(request, 'core/about.html')
 
 
+def resort_map(request):
+    facilities = Facility.objects.filter(is_available=True)
+    return render(request, 'core/map.html', {
+        'facilities': facilities,
+    })
+
+
 def amenities(request):
     return render(request, 'core/amenities.html')
 

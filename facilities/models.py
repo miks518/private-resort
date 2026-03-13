@@ -13,6 +13,11 @@ class Facility(models.Model):
     price_per_day = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='facilities/', blank=True, null=True)
     is_available = models.BooleanField(default=True)
+    
+    # Map coordinates (0.0 to 100.0 representing percentage of the map image)
+    map_x = models.FloatField(default=50.0, help_text="X coordinate on the map (%)")
+    map_y = models.FloatField(default=50.0, help_text="Y coordinate on the map (%)")
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
