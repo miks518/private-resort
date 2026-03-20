@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Rates — Jaime's Private Resort{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Our Rates</h1>
+        <p>Transparent pricing for every occasion. All rates are in Philippine Peso (PHP).</p>
+    </div>
+</div>
+
+<section class="section" id="rates">
+    <div class="container">
+
+        {% if packages %}
+        <div class="rates-grid">
+            {% for package in packages %}
+            <div class="rate-card">
+
+                {% if package.photo %}
+                <div class="rate-card__photo">
+                    <img src="{{ package.photo.url }}" alt="{{ package.name }}">
+                </div>
+                {% else %}
+                <div class="rate-card__photo rate-card__photo--placeholder">
+                    <i class="fas fa-umbrella-beach"></i>
+                </div>
+                {% endif %}
+
+                <div class="rate-card__body">
+                    <div class="rate-card__header">
+                        <span class="rate-card__label">✨ Package</span>
+                        <h2 class="rate-card__name">{{ package.name }}</h2>
+                        <div class="rate-card__price">
+                            <span class="rate-card__currency">₱</span>
+                            <span class="rate-card__amount">{{ package.price|floatformat:0 }}</span>
+                        </div>
+                    </div>
+
+                    <div class="rate-card__inclusions">
+                        <h4><i class="fas fa-map-marker-alt"></i> Inclusions</h4>
+                        <ul>
+                            {% for item in package.inclusions_list %}
+                            <li><i class="fas fa-check-circle"></i> {{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    {% if package.note %}
+                    <div class="rate-card__note">
+                        <i class="fas fa-info-circle"></i> {{ package.note }}
+                    </div>
+                    {% endif %}
+
+                    <a href="{% url 'accounts:login' %}" class="btn btn-primary rate-card__cta">
+                        <i class="fas fa-calendar-check"></i> Book This Package
+                    </a>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-tags"></i>
+            <h3>Rates Coming Soon</h3>
+            <p>Our pricing packages are being updated. Please check back or contact us directly.</p>
+            <a href="{% url 'core:contact' %}" class="btn btn-primary">Contact Us</a>
+        </div>
+        {% endif %}
+
+        <div class="rates-note section" style="text-align:center; margin-top: var(--space-xl);">
+            <p style="opacity:0.7; font-size:0.95rem;">
+                <i class="fas fa-phone"></i> Questions about pricing?
+                <a href="{% url 'core:contact' %}" style="color:var(--color-primary); font-weight:600;">Contact us</a> and we'll be happy to help.
+            </p>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

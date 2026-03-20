@@ -45,6 +45,10 @@ def initiate_payment(request, reservation_pk):
         payment.save()
         reservation.status = Reservation.Status.PAID
         reservation.save()
+        
+        from reservations.utils import notify_admin_payment_success
+        notify_admin_payment_success(reservation, payment)
+
         return redirect('payments:success', pk=payment.pk)
 
     # Build success/cancel URLs
@@ -84,6 +88,10 @@ def verify_payment(request, pk):
                 payment.save()
                 payment.reservation.status = Reservation.Status.PAID
                 payment.reservation.save()
+                
+                from reservations.utils import notify_admin_payment_success
+                notify_admin_payment_success(payment.reservation, payment)
+                
                 return redirect('payments:success', pk=payment.pk)
 
     # If verification fails or is still processing
@@ -135,6 +143,9 @@ def paymongo_webhook(request):
                 payment.save()
                 payment.reservation.status = Reservation.Status.PAID
                 payment.reservation.save()
+                
+                from reservations.utils import notify_admin_payment_success
+                notify_admin_payment_success(payment.reservation, payment)
             except Payment.DoesNotExist:
                 pass
 

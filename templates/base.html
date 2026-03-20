@@ -33,6 +33,7 @@
                 <li><a href="{% url 'facilities:list' %}" class="nav-link">Facilities</a></li>
                 <li><a href="{% url 'core:map' %}" class="nav-link">Resort Map</a></li>
                 <li><a href="{% url 'core:amenities' %}" class="nav-link">Amenities</a></li>
+                <li><a href="{% url 'core:rates' %}" class="nav-link">Rates</a></li>
                 <li><a href="{% url 'core:about' %}" class="nav-link">About</a></li>
                 <li><a href="{% url 'core:contact' %}" class="nav-link">Contact</a></li>
                 {% if user.is_authenticated %}
@@ -91,6 +92,7 @@
                         <li><a href="{% url 'core:home' %}">Home</a></li>
                         <li><a href="{% url 'facilities:list' %}">Facilities</a></li>
                         <li><a href="{% url 'core:amenities' %}">Amenities</a></li>
+                        <li><a href="{% url 'core:rates' %}">Rates</a></li>
                         <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
                     </ul>
                 </div>

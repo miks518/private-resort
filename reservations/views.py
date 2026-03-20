@@ -69,6 +69,10 @@ def create_reservation(request, facility_slug):
 
             reservation.calculate_total()
             reservation.save()
+            
+            from .utils import notify_admin_booking_created
+            notify_admin_booking_created(reservation)
+
             messages.success(request, 'Reservation created! Please proceed to payment.')
             return redirect('reservations:detail', pk=reservation.pk)
     else:

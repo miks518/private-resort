@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from facilities.models import Facility
+from .models import RatePackage
 
 
 def home(request):
@@ -25,6 +26,11 @@ def resort_map(request):
 
 def amenities(request):
     return render(request, 'core/amenities.html')
+
+
+def rates(request):
+    packages = RatePackage.objects.all()
+    return render(request, 'core/rates.html', {'packages': packages})
 
 
 def contact(request):
