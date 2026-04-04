@@ -21,8 +21,8 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
-            <a href="{% url 'core:home' %}" class="nav-logo">
-                <i class="fas fa-umbrella-beach"></i>
+            <a href="{% url 'core:home' %}" class="nav-logo" style="display:flex; align-items:center; gap:0.5rem;">
+                <img src="{% static 'img/logo.jpg' %}" alt="Jaime Place Logo" style="height: 45px; width: 45px; border-radius: 8px; object-fit: cover;">
                 <span>Jaime's Resort</span>
             </a>
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
