@@ -2,7 +2,7 @@
 
 A comprehensive, full-stack resort booking and management system built with Django. This application handles everything from customer reservations and dynamic facility showcasing to automated email notifications and secure online payments.
 
-## ✨ Key Features
+## Key Features
 
 * **Modern Dark Mode UI:** Features a custom "Deep Ocean" dark mode design aesthetic using pure CSS, glassmorphism, and responsive bento grid galleries.
 * **Online Reservations:** A robust booking engine that prevents double-booking and handles maximum capacity checks.
@@ -10,7 +10,7 @@ A comprehensive, full-stack resort booking and management system built with Djan
 * **Email Notifications:** Built-in SMTP support that automatically dispatches booking and payment receipts directly to the resort admin.
 * **Admin Dashboard:** A secured Django admin panel for managing facilities, updating pricing, checking reservations, and monitoring transaction statuses.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 * **Backend:** Python + Django
 * **Frontend:** HTML5, Vanilla CSS3 (Custom Design System), JavaScript
@@ -18,7 +18,7 @@ A comprehensive, full-stack resort booking and management system built with Djan
 * **Media Storage:** Cloudinary integration for handling high-quality gallery images
 * **APIs:** PayMongo (Payments), Google SMTP (Email)
 
-## 🚀 Getting Started Locally
+## Getting Started Locally
 
 Follow these instructions to run the website on your local Windows/Mac machine.
 
