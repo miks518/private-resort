@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Amenities — Jaime's Private Resort{% endblock %}
 
@@ -10,19 +11,34 @@
     </div>
 </div>
 
+<!-- Amenity Grid -->
 <section class="section">
     <div class="container">
         <div class="amenity-grid">
             <div class="amenity-card">
                 <div class="amenity-icon"><i class="fas fa-swimming-pool"></i></div>
-                <h3>Swimming Pools</h3>
-                <p>Crystal-clear pools for adults and kids, surrounded by lush greenery and comfortable lounging areas.
-                </p>
+                <h3>Swimming Pool</h3>
+                <p>Crystal-clear pool surrounded by lush greenery, pebble walkways, and comfortable lounging areas.</p>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-glass-cheers"></i></div>
+                <h3>Function Hall</h3>
+                <p>Spacious covered hall ideal for birthdays, reunions, corporate events, and grand celebrations.</p>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-volleyball-ball"></i></div>
+                <h3>Volleyball Court</h3>
+                <p>Lighted court for friendly games under the stars — perfect for sports enthusiasts and groups.</p>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-campground"></i></div>
+                <h3>Camping Area</h3>
+                <p>Set up camp by the fire pit and swing under the moonlit palms for an unforgettable outdoor experience.</p>
             </div>
             <div class="amenity-card">
                 <div class="amenity-icon"><i class="fas fa-utensils"></i></div>
-                <h3>Outdoor Kitchen & Grill</h3>
-                <p>Fully equipped grilling stations and outdoor kitchens perfect for cookouts and celebrations.</p>
+                <h3>Outdoor Dining</h3>
+                <p>Unique wagon-wheel tables and stump seating under string lights for a rustic al fresco dining experience.</p>
             </div>
             <div class="amenity-card">
                 <div class="amenity-icon"><i class="fas fa-music"></i></div>
@@ -30,24 +46,9 @@
                 <p>State-of-the-art karaoke systems and entertainment setups for endless hours of fun.</p>
             </div>
             <div class="amenity-card">
-                <div class="amenity-icon"><i class="fas fa-home"></i></div>
-                <h3>Private Cottages</h3>
-                <p>Cozy cottages equipped with amenities for overnight stays and intimate gatherings.</p>
-            </div>
-            <div class="amenity-card">
-                <div class="amenity-icon"><i class="fas fa-glass-cheers"></i></div>
-                <h3>Event Hall</h3>
-                <p>Spacious function hall ideal for birthdays, reunions, corporate events, and celebrations.</p>
-            </div>
-            <div class="amenity-card">
                 <div class="amenity-icon"><i class="fas fa-wifi"></i></div>
                 <h3>Free Wi-Fi</h3>
                 <p>Stay connected throughout the resort with complimentary high-speed internet access.</p>
-            </div>
-            <div class="amenity-card">
-                <div class="amenity-icon"><i class="fas fa-parking"></i></div>
-                <h3>Ample Parking</h3>
-                <p>Secure and spacious parking areas to accommodate all our guests comfortably.</p>
             </div>
             <div class="amenity-card">
                 <div class="amenity-icon"><i class="fas fa-shield-alt"></i></div>
@@ -55,6 +56,52 @@
                 <p>Round-the-clock security personnel and CCTV coverage ensures your safety and peace of mind.</p>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- Photo showcase -->
+<section class="section" style="background: var(--color-bg-section); border-top: 1px solid var(--color-border);">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">See It Live</span>
+            <h2>The Resort in Action</h2>
+            <p>Real moments captured at Jaime Place — from poolside to celebrations.</p>
+        </div>
+        <div class="photo-gallery">
+            <div class="gallery-item gallery-item--large">
+                <img src="{% static 'images/472300814_122162018222277889_1357390078611541968_n.jpg' %}" alt="Wedding ceremony in function hall">
+                <div class="gallery-label">Wedding Ceremony</div>
+            </div>
+            <div class="gallery-item gallery-item--tall">
+                <img src="{% static 'images/473125485_122163670100277889_7177889997754988817_n.jpg' %}" alt="Event reception in hall">
+                <div class="gallery-label">Event Reception</div>
+            </div>
+            <div class="gallery-item gallery-item--tall">
+                <img src="{% static 'images/472149870_122162182346277889_8885944782718763318_n.jpg' %}" alt="Buffet catering setup">
+                <div class="gallery-label">Catering & Buffet</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/480825048_122173952594277889_5762951737741566331_n.jpg' %}" alt="Night view string lights">
+                <div class="gallery-label">Evening Ambiance</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/480593686_122173952636277889_4585297789160703824_n.jpg' %}" alt="Wood stump outdoor seating">
+                <div class="gallery-label">Outdoor Seating</div>
+            </div>
+            <div class="gallery-item gallery-item--wide">
+                <img src="{% static 'images/472290011_122162018240277889_747325061465517112_n.jpg' %}" alt="Garden event setup daytime">
+                <div class="gallery-label">Garden Events</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section">
+    <div class="container">
+        <h2>Ready to Experience It All?</h2>
+        <p>Book your next event or getaway at Jaime Place Private Resort.</p>
+        <a href="{% url 'facilities:list' %}" class="btn btn-primary btn-lg">View Facilities</a>
     </div>
 </section>
 {% endblock %}

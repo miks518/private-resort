@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}About — Jaime's Private Resort{% endblock %}
 
@@ -10,35 +11,137 @@
     </div>
 </div>
 
-<div class="about-content">
-    <h2>Our Story</h2>
-    <p>
-        Jaime's Private Resort has been a beloved destination for families, friends, and groups
-        looking to escape the hustle and bustle of everyday life. Nestled in a serene setting,
-        our resort offers a private oasis where you can relax, celebrate, and reconnect.
-    </p>
+<!-- About Content -->
+<section class="section">
+    <div class="container">
+        <div class="about-layout">
+            <!-- Left: Image -->
+            <div class="about-image-block">
+                <img src="{% static 'images/472290011_122162018240277889_747325061465517112_n.jpg' %}" alt="Resort Event Setup" class="about-main-img">
+                <div class="about-img-accent">
+                    <img src="{% static 'images/480272915_122173952606277889_9008445934576458414_n.jpg' %}" alt="Resort Pool Night View">
+                </div>
+            </div>
+            <!-- Right: Text -->
+            <div class="about-text-block">
+                <span class="section-label">Our Story</span>
+                <h2>A Private Oasis For Every Occasion</h2>
+                <p>
+                    Jaime Place Private Resort has been a beloved destination for families, friends, and groups
+                    looking to escape the hustle of everyday life. Nestled in a serene setting, our resort offers
+                    a private oasis where you can relax, celebrate, and reconnect.
+                </p>
+                <p style="margin-top: var(--space-md);">
+                    From our glistening swimming pool to our elegantly decorated function hall, every corner of
+                    Jaime Place is designed to create lasting memories. Whether it's a wedding, reunion, birthday,
+                    or a quiet poolside escape — we make every moment special.
+                </p>
 
-    <h2>Our Mission</h2>
-    <p>
-        We are dedicated to providing an exceptional resort experience that combines comfort,
-        privacy, and world-class facilities. Every guest who walks through our gates is treated
-        like family, and every event hosted here becomes a cherished memory.
-    </p>
-
-    <h2>Why Choose Us</h2>
-    <p>
-        From our crystal-clear swimming pools to our beautifully landscaped gardens, every detail
-        at Jaime's Private Resort is designed with our guests in mind. Our online reservation system
-        makes booking effortless, and our virtual tours let you explore our facilities from the
-        comfort of your home.
-    </p>
-    <p>
-        We accept multiple payment methods through our secure payment gateway, including GCash,
-        Maya, and credit/debit cards, making the booking process as smooth as your vacation.
-    </p>
-
-    <div class="text-center mt-3">
-        <a href="{% url 'facilities:list' %}" class="btn btn-primary">Explore Our Facilities</a>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Online Reservation System</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Event & Wedding Packages</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Catering Available</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Exclusive Private Venue</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>GCash / Maya Payments</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>24/7 On-Site Security</span>
+                    </div>
+                </div>
+                <a href="{% url 'facilities:list' %}" class="btn btn-primary" style="margin-top: var(--space-xl);">
+                    <i class="fas fa-search"></i> Explore Facilities
+                </a>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+
+<!-- Events Gallery -->
+<section class="section" style="background: var(--color-bg-section); border-top: 1px solid var(--color-border);">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Hosted Events</span>
+            <h2>Where Memories Are Made</h2>
+            <p>We've hosted hundreds of weddings, birthdays, reunions, and corporate events.</p>
+        </div>
+        <div class="photo-gallery">
+            <div class="gallery-item gallery-item--tall">
+                <img src="{% static 'images/472094319_122162018630277889_6749445964273405160_n.jpg' %}" alt="Wedding setup">
+                <div class="gallery-label">Weddings</div>
+            </div>
+            <div class="gallery-item gallery-item--large">
+                <img src="{% static 'images/473544946_122163670100277889_3314260578244992613_n.jpg' %}" alt="Event reception">
+                <div class="gallery-label">Celebrations</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/472300814_122162018222277889_1357390078611541968_n.jpg' %}" alt="Function hall event">
+                <div class="gallery-label">Function Hall Events</div>
+            </div>
+            <div class="gallery-item gallery-item--tall">
+                <img src="{% static 'images/472149870_122162182346277889_8885944782718763318_n.jpg' %}" alt="Catering and buffet">
+                <div class="gallery-label">Catering Services</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/480297057_122173952576277889_8729404030480324971_n.jpg' %}" alt="Night garden ambiance">
+                <div class="gallery-label">Night Events</div>
+            </div>
+            <div class="gallery-item gallery-item--wide">
+                <img src="{% static 'images/473125485_122163669710277889_7177889997754988817_n.jpg' %}" alt="Ceremony in hall">
+                <div class="gallery-label">Ceremonies</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Guest Experiences Gallery -->
+<section class="section" style="border-top: 1px solid var(--color-border);">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Guest Experiences</span>
+            <h2>Vibrant Community</h2>
+            <p>See our resort come alive with families and groups enjoying their private retreats.</p>
+        </div>
+        <div class="photo-gallery">
+            <div class="gallery-item">
+                <img src="{% static 'images/470230612_122159212484277889_3752064771759129031_n.jpg' %}" alt="Pool Fun">
+                <div class="gallery-label">Poolside Fun</div>
+            </div>
+            <div class="gallery-item gallery-item--large">
+                <img src="{% static 'images/470179523_122159138222277889_8661956761847782367_n.jpg' %}" alt="Live Band Performance">
+                <div class="gallery-label">Live Entertainment</div>
+            </div>
+            <div class="gallery-item gallery-item--tall">
+                <img src="{% static 'images/470205145_122159128400277889_6398466131793404368_n.jpg' %}" alt="Group Photo">
+                <div class="gallery-label">Family & Friends</div>
+            </div>
+            <div class="gallery-item gallery-item--tall">
+                <img src="{% static 'images/470209570_122159138084277889_152995643407102958_n.jpg' %}" alt="Volleyball Game">
+                <div class="gallery-label">Outdoor Activities</div>
+            </div>
+            <div class="gallery-item gallery-item--wide">
+                <img src="{% static 'images/470207748_122159137718277889_8260900710141647632_n.jpg' %}" alt="Relaxing at the resort">
+                <div class="gallery-label">Relaxation</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/473123531_122163670106277889_7555518372591850073_n.jpg' %}" alt="Wedding Ceremony Attendees">
+                <div class="gallery-label">Memorable Moments</div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

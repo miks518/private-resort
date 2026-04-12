@@ -8,9 +8,7 @@
     <title>{% block title %}Jaime's Private Resort{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -21,9 +19,9 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
-            <a href="{% url 'core:home' %}" class="nav-logo" style="display:flex; align-items:center; gap:0.5rem;">
-                <img src="{% static 'img/logo.jpg' %}" alt="Jaime Place Logo" style="height: 45px; width: 45px; border-radius: 8px; object-fit: cover;">
-                <span>Jaime's Resort</span>
+            <a href="{% url 'core:home' %}" class="nav-logo">
+                <img src="{% static 'images/logo.jpg' %}" alt="Jaime Place Logo">
+                <span>Jaime Place</span>
             </a>
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
                 <span></span><span></span><span></span>
@@ -54,7 +52,7 @@
                 </li>
                 {% else %}
                 <li><a href="{% url 'accounts:login' %}" class="nav-link btn-nav btn-nav--outline">Login</a></li>
-                <li><a href="{% url 'accounts:register' %}" class="nav-link btn-nav btn-nav--primary">Sign Up</a></li>
+                <li><a href="{% url 'accounts:register' %}" class="nav-link btn-nav btn-nav--primary">Book Now</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -83,8 +81,12 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3><i class="fas fa-umbrella-beach"></i> Jaime's Private Resort</h3>
-                    <p>Your private paradise for relaxation and celebration. Experience the best of resort living with
-                        world-class facilities and hospitality.</p>
+                    <p>Your private paradise for relaxation and celebration. Experience the best of resort living with world-class facilities and genuine Filipino hospitality.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
@@ -102,18 +104,14 @@
                         <li><a href="{% url 'facilities:list' %}">Virtual Tours</a></li>
                         <li><a href="{% url 'facilities:list' %}">Online Booking</a></li>
                         <li><a href="{% url 'core:amenities' %}">Event Hosting</a></li>
+                        <li><a href="{% url 'core:map' %}">Resort Map</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Contact</h4>
-                    <p><i class="fas fa-map-marker-alt"></i> Jaime's Private Resort</p>
-                    <p><i class="fas fa-envelope"></i> info@jaimesresort.com</p>
-                    <p><i class="fas fa-phone"></i> +63 912 345 6789</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    </div>
+                    <p><i class="fas fa-map-marker-alt" style="color:var(--color-primary);margin-right:0.5rem;"></i> Jaime's Private Resort</p>
+                    <p style="margin-top:0.5rem;"><i class="fas fa-envelope" style="color:var(--color-primary);margin-right:0.5rem;"></i> info@jaimesresort.com</p>
+                    <p style="margin-top:0.5rem;"><i class="fas fa-phone" style="color:var(--color-primary);margin-right:0.5rem;"></i> +63 912 345 6789</p>
                 </div>
             </div>
             <div class="footer-bottom">

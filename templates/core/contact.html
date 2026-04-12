@@ -47,8 +47,8 @@
             </div>
 
             <!-- Contact Form -->
-            <div class="form-container" style="box-shadow:none; padding:0;">
-                <h3 style="font-size:1.35rem; margin-bottom:var(--space-lg);">Send Us a Message</h3>
+            <div class="form-container">
+                <h3 style="font-size:1.5rem; font-family:var(--font-heading); color:var(--color-primary); margin-bottom:var(--space-lg); text-align:center;">Send Us a Message</h3>
                 <form method="POST" action="{% url 'core:contact' %}">
                     {% csrf_token %}
                     <div class="form-group">

@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Jaime's Private Resort — Your Private Paradise{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero" id="hero">
+<section class="hero" id="hero" style="background-image: url('{% static 'images/480272915_122173952606277889_9008445934576458414_n.jpg' %}'); background-size: cover; background-position: center;">
+    <div class="hero-overlay"></div>
+    <div class="hero-grid-bg"></div>
     <div class="hero-content">
-        <span class="hero-badge">✦ Welcome to Paradise</span>
-        <h1>Experience Luxury at Jaime's Private Resort</h1>
+        <span class="hero-badge">Now Open for Reservations</span>
+        <h1>
+            Your Private<br>
+            <span class="gradient-text">Paradise Awaits</span>
+        </h1>
         <p>
-            Escape to a world of serenity and celebration. Book our exclusive resort facilities,
-            explore through virtual tours, and create unforgettable memories with your loved ones.
+            Escape to Jaime Place Private Resort — an exclusive haven for relaxation, celebration,
+            and unforgettable memories. Book your experience today.
         </p>
         <div class="hero-buttons">
             <a href="{% url 'facilities:list' %}" class="btn btn-primary btn-lg">
@@ -19,6 +25,53 @@
             <a href="{% url 'core:about' %}" class="btn btn-secondary btn-lg">
                 <i class="fas fa-play-circle"></i> Learn More
             </a>
+        </div>
+    </div>
+</section>
+
+<!-- Amenity Marquee Strip -->
+<div class="marquee-strip">
+    <div class="marquee-track">
+        <span class="marquee-item"><span class="dot"></span> Swimming Pool</span>
+        <span class="marquee-item"><span class="dot"></span> Function Hall</span>
+        <span class="marquee-item"><span class="dot"></span> Volleyball Court</span>
+        <span class="marquee-item"><span class="dot"></span> Camping Area</span>
+        <span class="marquee-item"><span class="dot"></span> Outdoor Dining</span>
+        <span class="marquee-item"><span class="dot"></span> 24/7 Security</span>
+        <span class="marquee-item"><span class="dot"></span> Free Wi-Fi</span>
+        <span class="marquee-item"><span class="dot"></span> Event Hosting</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="marquee-item"><span class="dot"></span> Swimming Pool</span>
+        <span class="marquee-item"><span class="dot"></span> Function Hall</span>
+        <span class="marquee-item"><span class="dot"></span> Volleyball Court</span>
+        <span class="marquee-item"><span class="dot"></span> Camping Area</span>
+        <span class="marquee-item"><span class="dot"></span> Outdoor Dining</span>
+        <span class="marquee-item"><span class="dot"></span> 24/7 Security</span>
+        <span class="marquee-item"><span class="dot"></span> Free Wi-Fi</span>
+        <span class="marquee-item"><span class="dot"></span> Event Hosting</span>
+    </div>
+</div>
+
+<!-- Stats Bar -->
+<section class="section" style="padding-top: var(--space-3xl); padding-bottom: var(--space-3xl); background: var(--color-bg-section);">
+    <div class="container">
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Events Hosted</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Facilities</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5★</div>
+                <div class="stat-label">Guest Rating</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Private & Exclusive</div>
+            </div>
         </div>
     </div>
 </section>
@@ -35,13 +88,11 @@
         {% if featured_facilities %}
         <div class="card-grid">
             {% for facility in featured_facilities %}
-            <a href="{% url 'facilities:detail' slug=facility.slug %}" class="card"
-                style="text-decoration:none; color:inherit;">
+            <a href="{% url 'facilities:detail' slug=facility.slug %}" class="card" style="text-decoration:none; color:inherit;">
                 {% if facility.image %}
                 <img src="{{ facility.image.url }}" alt="{{ facility.name }}" class="card-img">
                 {% else %}
-                <div class="card-img"
-                    style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d6e5b,#14a085);color:white;font-size:2rem;">
+                <div class="card-img" style="display:flex;align-items:center;justify-content:center;background:var(--color-surface-2);color:var(--color-primary);font-size:2.5rem;">
                     <i class="fas fa-water"></i>
                 </div>
                 {% endif %}
@@ -66,16 +117,50 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section"
-    style="background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary)); color: white; text-align: center;">
+<!-- Photo Gallery Section -->
+<section class="section" style="background: var(--color-bg-section); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
     <div class="container">
-        <h2 style="color:white; font-size:2rem; margin-bottom:var(--space-md);">Ready to Make a Reservation?</h2>
-        <p style="opacity:0.9; margin-bottom:var(--space-xl); max-width:500px; margin-left:auto; margin-right:auto;">
-            Book your perfect getaway today and experience the luxury of Jaime's Private Resort.
-        </p>
+        <div class="section-header">
+            <span class="section-label">Gallery</span>
+            <h2>Resort Highlights</h2>
+            <p>A glimpse into the beauty and elegance of Jaime Place Private Resort.</p>
+        </div>
+        <div class="photo-gallery">
+            <div class="gallery-item gallery-item--large">
+                <img src="{% static 'images/469449987_122158035236277889_271376918525999817_n.jpg' %}" alt="Resort Swimming Pool">
+                <div class="gallery-label">Swimming Pool</div>
+            </div>
+            <div class="gallery-item gallery-item--tall">
+                <img src="{% static 'images/472094319_122162018630277889_6749445964273405160_n.jpg' %}" alt="Wedding Reception Setup">
+                <div class="gallery-label">Events & Weddings</div>
+            </div>
+            <div class="gallery-item gallery-item--tall">
+                <img src="{% static 'images/480297057_122173952576277889_8729404030480324971_n.jpg' %}" alt="Night Lights Ambiance">
+                <div class="gallery-label">Night Ambiance</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/472139804_122162182574277889_5563166609873340168_n.jpg' %}" alt="Outdoor Event Setup">
+                <div class="gallery-label">Outdoor Events</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/472290011_122162018240277889_747325061465517112_n.jpg' %}" alt="Garden Wedding">
+                <div class="gallery-label">Garden Wedding</div>
+            </div>
+            <div class="gallery-item gallery-item--wide">
+                <img src="{% static 'images/480593686_122173952636277889_4585297789160703824_n.jpg' %}" alt="Night Garden Dining">
+                <div class="gallery-label">Night Garden</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section cta-section">
+    <div class="container">
+        <h2>Ready to Make a Reservation?</h2>
+        <p>Book your perfect getaway today and experience the luxury of Jaime Place Private Resort.</p>
         {% if user.is_authenticated %}
-        <a href="{% url 'facilities:list' %}" class="btn btn-primary btn-lg">Browse & Book Now</a>
+        <a href="{% url 'facilities:list' %}" class="btn btn-primary btn-lg">Browse &amp; Book Now</a>
         {% else %}
         <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg">Sign Up to Book</a>
         {% endif %}
