@@ -5,7 +5,8 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero" id="hero" style="background-image: url('{% static 'images/480272915_122173952606277889_9008445934576458414_n.jpg' %}'); background-size: cover; background-position: center;">
+<section class="hero" id="hero"
+    style="background-image: url('{% static 'images/480272915_122173952606277889_9008445934576458414_n.jpg' %}'); background-size: cover; background-position: center;">
     <div class="hero-overlay"></div>
     <div class="hero-grid-bg"></div>
     <div class="hero-content">
@@ -15,7 +16,7 @@
             <span class="gradient-text">Paradise Awaits</span>
         </h1>
         <p>
-            Escape to Jaime Place Private Resort — an exclusive haven for relaxation, celebration,
+            Escape to Jaime Place Private Resort, an exclusive haven for relaxation, celebration,
             and unforgettable memories. Book your experience today.
         </p>
         <div class="hero-buttons">
@@ -53,7 +54,8 @@
 </div>
 
 <!-- Stats Bar -->
-<section class="section" style="padding-top: var(--space-3xl); padding-bottom: var(--space-3xl); background: var(--color-bg-section);">
+<section class="section"
+    style="padding-top: var(--space-3xl); padding-bottom: var(--space-3xl); background: var(--color-bg-section);">
     <div class="container">
         <div class="stats-bar">
             <div class="stat-item">
@@ -88,11 +90,13 @@
         {% if featured_facilities %}
         <div class="card-grid">
             {% for facility in featured_facilities %}
-            <a href="{% url 'facilities:detail' slug=facility.slug %}" class="card" style="text-decoration:none; color:inherit;">
+            <a href="{% url 'facilities:detail' slug=facility.slug %}" class="card"
+                style="text-decoration:none; color:inherit;">
                 {% if facility.image %}
                 <img src="{{ facility.image.url }}" alt="{{ facility.name }}" class="card-img">
                 {% else %}
-                <div class="card-img" style="display:flex;align-items:center;justify-content:center;background:var(--color-surface-2);color:var(--color-primary);font-size:2.5rem;">
+                <div class="card-img"
+                    style="display:flex;align-items:center;justify-content:center;background:var(--color-surface-2);color:var(--color-primary);font-size:2.5rem;">
                     <i class="fas fa-water"></i>
                 </div>
                 {% endif %}
@@ -118,7 +122,8 @@
 </section>
 
 <!-- Photo Gallery Section -->
-<section class="section" style="background: var(--color-bg-section); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+<section class="section"
+    style="background: var(--color-bg-section); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
     <div class="container">
         <div class="section-header">
             <span class="section-label">Gallery</span>
@@ -127,27 +132,33 @@
         </div>
         <div class="photo-gallery">
             <div class="gallery-item gallery-item--large">
-                <img src="{% static 'images/469449987_122158035236277889_271376918525999817_n.jpg' %}" alt="Resort Swimming Pool">
+                <img src="{% static 'images/469449987_122158035236277889_271376918525999817_n.jpg' %}"
+                    alt="Resort Swimming Pool">
                 <div class="gallery-label">Swimming Pool</div>
             </div>
             <div class="gallery-item gallery-item--tall">
-                <img src="{% static 'images/472094319_122162018630277889_6749445964273405160_n.jpg' %}" alt="Wedding Reception Setup">
+                <img src="{% static 'images/472094319_122162018630277889_6749445964273405160_n.jpg' %}"
+                    alt="Wedding Reception Setup">
                 <div class="gallery-label">Events & Weddings</div>
             </div>
             <div class="gallery-item gallery-item--tall">
-                <img src="{% static 'images/480297057_122173952576277889_8729404030480324971_n.jpg' %}" alt="Night Lights Ambiance">
+                <img src="{% static 'images/480297057_122173952576277889_8729404030480324971_n.jpg' %}"
+                    alt="Night Lights Ambiance">
                 <div class="gallery-label">Night Ambiance</div>
             </div>
             <div class="gallery-item">
-                <img src="{% static 'images/472139804_122162182574277889_5563166609873340168_n.jpg' %}" alt="Outdoor Event Setup">
+                <img src="{% static 'images/472139804_122162182574277889_5563166609873340168_n.jpg' %}"
+                    alt="Outdoor Event Setup">
                 <div class="gallery-label">Outdoor Events</div>
             </div>
             <div class="gallery-item">
-                <img src="{% static 'images/472290011_122162018240277889_747325061465517112_n.jpg' %}" alt="Garden Wedding">
+                <img src="{% static 'images/472290011_122162018240277889_747325061465517112_n.jpg' %}"
+                    alt="Garden Wedding">
                 <div class="gallery-label">Garden Wedding</div>
             </div>
             <div class="gallery-item gallery-item--wide">
-                <img src="{% static 'images/480593686_122173952636277889_4585297789160703824_n.jpg' %}" alt="Night Garden Dining">
+                <img src="{% static 'images/480593686_122173952636277889_4585297789160703824_n.jpg' %}"
+                    alt="Night Garden Dining">
                 <div class="gallery-label">Night Garden</div>
             </div>
         </div>
