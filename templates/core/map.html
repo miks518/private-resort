@@ -26,16 +26,163 @@
         margin-bottom: var(--space-xl);
         text-align: center;
     }
+
+    /* Virtual Tour Gallery Styles */
+    .tour-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--space-xl);
+        margin-top: var(--space-xl);
+    }
+
+    .tour-item {
+        background: var(--color-surface-1);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        border: 1px solid var(--color-border);
+        transition: transform 0.3s var(--transition-bounce), box-shadow 0.3s ease;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .tour-item:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--color-primary);
+    }
+
+    .tour-media-container {
+        position: relative;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        background: var(--color-surface-2);
+    }
+
+    .tour-media-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .tour-item:hover .tour-media-container img {
+        transform: scale(1.1);
+    }
+
+    .tour-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        z-index: 2;
+    }
+
+    .tour-badge--360 { background: var(--color-primary); }
+    .tour-badge--video { background: #e74c3c; }
+
+    .tour-play-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background: var(--color-primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 3;
+    }
+
+    .tour-item:hover .tour-play-btn {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .tour-info {
+        padding: var(--space-lg);
+    }
+
+    .tour-info h3 {
+        font-family: var(--font-heading);
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-text-main);
+    }
+
+    .tour-info .facility-tag {
+        font-size: 0.85rem;
+        color: var(--color-primary);
+        font-weight: 600;
+    }
+
+    /* Modal Styles */
+    .tour-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 10000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-xl);
+    }
+
+    .tour-modal.active { display: flex; }
+
+    .modal-content {
+        width: 100%;
+        max-width: 1200px;
+        aspect-ratio: 16/9;
+        background: black;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        position: relative;
+    }
+
+    #panorama-viewer { width: 100%; height: 100%; }
+
+    .modal-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        color: white;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+    }
 </style>
+<!-- Pannellum for 360 Photos -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 {% endblock %}
 
 {% block content %}
-<section class="section">
+<section class="section" style="padding-bottom: 0;">
     <div class="container">
         <div class="map-header">
-            <span class="section-label">Interactive Tour</span>
+            <span class="section-label">Interactive View</span>
             <h2>Resort Map</h2>
-            <p>Explore our premium facilities and find your favorite spot.</p>
+            <p>Locate Jaime Place and explore our beautiful surroundings.</p>
         </div>
 
         <div class="map-container">
@@ -49,7 +196,112 @@
         </div>
     </div>
 </section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Virtual Tour</span>
+            <h2>Experience the Resort in 3D</h2>
+            <p>Can't wait to visit? Take a peek at our facilities through our 360° photos and videos.</p>
+        </div>
+
+        {% if tours %}
+        <div class="tour-grid">
+            {% for tour in tours %}
+            <div class="tour-item" onclick="openTour('{{ tour.media_file.url }}', '{{ tour.media_type }}', '{{ tour.title }}')">
+                <div class="tour-media-container">
+                    {% if tour.media_type == 'panorama' %}
+                    <span class="tour-badge tour-badge--360"><i class="fas fa-vr-cardboard"></i> 360° View</span>
+                    {% elif tour.media_type == 'video' %}
+                    <span class="tour-badge tour-badge--video"><i class="fas fa-play"></i> Video</span>
+                    {% endif %}
+                    
+                    <div class="tour-play-btn"><i class="fas fa-expand"></i></div>
+                    
+                    {% if tour.thumbnail %}
+                    <img src="{{ tour.thumbnail.url }}" alt="{{ tour.title }}">
+                    {% else %}
+                    <img src="{{ tour.facility.image.url }}" alt="{{ tour.title }}">
+                    {% endif %}
+                </div>
+                <div class="tour-info">
+                    <span class="facility-tag">{{ tour.facility.name }}</span>
+                    <h3>{{ tour.title }}</h3>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state" style="padding: var(--space-3xl);">
+            <i class="fas fa-camera-retro" style="font-size: 3rem; color: var(--color-surface-3); margin-bottom: 1rem;"></i>
+            <h3>No 3D Tours Yet</h3>
+            <p>We are currently capturing beautiful views of our resort. Check back soon!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Virtual Tour Modal -->
+<div class="tour-modal" id="tourModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeTour()">&times;</button>
+        <div id="panorama-viewer"></div>
+        <video id="video-viewer" controls style="width:100%; height:100%; display:none;"></video>
+        <img id="image-viewer" style="width:100%; height:100%; object-fit:contain; display:none;">
+    </div>
+</div>
 {% endblock %}
 
 {% block extra_js %}
-{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+<script>
+    const modal = document.getElementById('tourModal');
+    const panoViewer = document.getElementById('panorama-viewer');
+    const videoViewer = document.getElementById('video-viewer');
+    const imageViewer = document.getElementById('image-viewer');
+    let activePannellum = null;
+
+    function openTour(url, type, title) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Reset viewers
+        panoViewer.style.display = 'none';
+        videoViewer.style.display = 'none';
+        imageViewer.style.display = 'none';
+        videoViewer.pause();
+
+        if (type === 'panorama') {
+            panoViewer.style.display = 'block';
+            if (activePannellum) activePannellum.destroy();
+            activePannellum = pannellum.viewer('panorama-viewer', {
+                "type": "equirectangular",
+                "panorama": url,
+                "autoLoad": true,
+                "title": title
+            });
+        } else if (type === 'video') {
+            videoViewer.style.display = 'block';
+            videoViewer.src = url;
+            videoViewer.play();
+        } else {
+            imageViewer.style.display = 'block';
+            imageViewer.src = url;
+        }
+    }
+
+    function closeTour() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        videoViewer.pause();
+        if (activePannellum) {
+            activePannellum.destroy();
+            activePannellum = null;
+        }
+    }
+
+    // Close on escape key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeTour();
+    });
+</script>

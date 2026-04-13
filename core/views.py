@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-from facilities.models import Facility
+from facilities.models import Facility, VirtualTour
 from .models import RatePackage
 
 
@@ -19,8 +19,10 @@ def about(request):
 
 def resort_map(request):
     facilities = Facility.objects.filter(is_available=True)
+    tours = VirtualTour.objects.all().select_related('facility')
     return render(request, 'core/map.html', {
         'facilities': facilities,
+        'tours': tours,
     })
 
 
