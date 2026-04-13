@@ -35,7 +35,9 @@
                 <li><a href="{% url 'core:amenities' %}" class="nav-link">Amenities</a></li>
                 <li><a href="{% url 'core:rates' %}" class="nav-link">Rates</a></li>
                 <li><a href="{% url 'core:about' %}" class="nav-link">About</a></li>
+                {% if user.is_authenticated %}
                 <li><a href="{% url 'core:contact' %}" class="nav-link">Contact</a></li>
+                {% endif %}
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'reservations:my_reservations' %}" class="nav-link">My Bookings</a></li>
                 <li class="nav-dropdown">
@@ -98,7 +100,9 @@
                         <li><a href="{% url 'facilities:list' %}">Facilities</a></li>
                         <li><a href="{% url 'core:amenities' %}">Amenities</a></li>
                         <li><a href="{% url 'core:rates' %}">Rates</a></li>
+                        {% if user.is_authenticated %}
                         <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="footer-col">
